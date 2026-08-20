@@ -1,136 +1,297 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
-
+    <title>รายการห้อง</title>
     <style>
-        /* จัดการพื้นหลังภาพรวมเป็นสีม่วงอ่อนพาสเทล */
-        body {
-            font-family: 'Kanit', sans-serif;
-            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 50%, #f5f3ff 100%);
-            min-height: 100vh;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 40px 20px;
-            color: #3b0764;
+            padding: 0;
+        }
+
+        :root {
+            --bg-start: #fbfaff;
+            --bg-end: #f3effa;
+            --primary-light: #d8ceed;
+            --primary-main: #b39ddb;
+            --primary-hover: #9575cd;
+            --text-main: #4a4259;
+            --text-muted: #847896;
+            --white: #ffffff;
+            --border-soft: #ede7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Sarabun', sans-serif;
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+            color: var(--text-main);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            box-sizing: border-box;
         }
 
-        /* ตกแต่งตารางให้ดูโมเดิร์นแบบม่วงพาสเทล */
-        table {
-            border-collapse: separate !important;
-            border-spacing: 0;
-            border: 1px solid #f3e8ff !important;
-            width: 100%;
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.95);
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(8px);
-            border-radius: 16px !important;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.15);
-            margin-bottom: 30px;
+            padding: 16px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(179, 157, 219, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-soft);
         }
 
-        /* หัวตารางโทนม่วงพาสเทล */
-        thead {
-            background-color: #8b5cf6;
+        .navbar-brand {
+            color: var(--primary-hover);
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        th {
-            border: none !important;
-            padding: 16px;
-            color: #ffffff;
-            font-weight: 500;
-            font-size: 16px;
-            text-align: left;
+        .navbar-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        /* ส่วนเนื้อหาตาราง */
-        tr {
-            transition: background-color 0.2s ease;
-        }
-
-        /* สลับสีแถวด้วยสีม่วงอ่อนพาสเทลจางๆ */
-        tr:nth-child(even) {
-            background-color: #faf5ff;
-        }
-
-        /* เอฟเฟกต์ตอนชี้เมาส์ */
-        tr:hover {
-            background-color: #f3e8ff;
-        }
-
-        td {
-            border: none !important;
-            border-bottom: 1px solid #f3e8ff !important;
-            padding: 16px;
-            color: #3b0764;
-            vertical-align: middle;
-        }
-
-        /* ตกแต่งลิงก์ Go To index ให้เป็นปุ่มสีม่วงพาสเทลไล่เฉด */
-        a {
-            display: inline-block;
-            background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
-            color: #ffffff;
+        .navbar-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 18px;
+            background: var(--bg-start);
+            color: var(--text-main);
             text-decoration: none;
-            padding: 12px 28px;
-            border-radius: 25px;
+            border-radius: 20px;
             font-weight: 500;
-            box-shadow: 0 4px 14px rgba(168, 85, 247, 0.35);
-            transition: all 0.3s ease;
+            font-size: 14px;
+            border: 1px solid var(--border-soft);
+            transition: all 0.25s ease;
         }
 
-        a:hover {
-            opacity: 0.92;
+        .navbar-links a:hover {
+            background: var(--primary-main);
+            color: var(--white);
+            border-color: var(--primary-main);
             transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(168, 85, 247, 0.45);
+            box-shadow: 0 4px 12px rgba(179, 157, 219, 0.3);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        main {
+            flex: 1;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-hover);
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .table-wrapper {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(179, 157, 219, 0.12);
+            overflow: hidden;
+            border: 1px solid var(--border-soft);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #e1d5f5, #d1c4e9);
+        }
+
+        thead th {
+            color: var(--text-main);
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        tbody tr {
+            transition: background 0.2s ease;
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        tbody tr:nth-child(even) {
+            background: #faf8ff;
+        }
+
+        tbody tr:hover {
+            background: #f3edfc;
+        }
+
+        tbody td {
+            padding: 14px 16px;
+            font-size: 14px;
+            vertical-align: middle;
+            color: var(--text-main);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .badge-yes {
+            background: #e8f8f0;
+            color: #2e7d32;
+        }
+
+        .badge-no {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--primary-hover);
+        }
+
+        .btn-link {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 10px 24px;
+            background: var(--primary-main);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(179, 157, 219, 0.3);
+        }
+
+        .btn-link:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--white);
+            border-top: 1px solid var(--border-soft);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 22px 20px;
+            font-size: 13px;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: var(--primary-hover);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 <body>
-    
-    <?php
-        include "action/connect.php";
-        //       ดึง  ทั้งหมด จาก orders
-        $sql = "SELECT * FROM rooms";
-        //                      db.   คำสั่ง
-        $result = mysqli_query($con, $sql);
-        // ทดสอบตัวแปร
-        // var_dump($result);
-    ?> 
 
-    <table border=1>
-        <thead>
-            <th>รหัสห้อง</th>
-            <th>อนุญาตสูบบุหรี่</th>
-            <th>bathtub</th>
-            <th>price</th>
-        </thead>
-        <?php 
-            foreach($result as $room){
-                ?>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="navbar-brand">🏨 Order Management</div>
+        <div class="navbar-links">
+            <a href="index.php">Home</a>
+            <a href="room.php">🛏️ ห้องพัก</a>
+            <a href="add_order.php">➕ เพิ่มออเดอร์</a>
+            <a href="manage_order.php">⚙️ จัดการออเดอร์</a>
+        </div>
+    </nav>
 
-                    <tr>
-                        <td><?= $room["room_id"] ?></td>
-                        <td><?= $room["smoke"] ?></td>
-                        <td><?= $room["bathtub"] ?></td>
-                        <td><?= $room["price"] ?></td>
-                    </tr>
+    <!-- ===== CONTENT (ไม่แก้ไข) ===== -->
+    <main>
+        <div class="container">
+            <h1>🛏️ รายการห้อง (Rooms)</h1>
 
-                <?php
-            }
-        ?>
-    </table>
+            <?php
+                // เชื่อมต่อฐานข้อมูล
+                include "action/connect.php";
 
-    <a href="index.php">Go To index</a>
+                //       ดึง  ทั้งหมด จาก ชื่อsql
+                $sql = "SELECT * FROM rooms";
+
+                //                      db.   คำสั่ง
+                $result = mysqli_query($con, $sql);
+
+                // ทดสอบตัวแปร
+                // var_dump($result);
+            ?>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>รหัสห้อง</th>
+                            <th>สูบบุหรี่</th>
+                            <th>อ่างอาบน้ำ</th>
+                            <th>ราคา</th>
+                        </tr>
+                    </thead>
+                        <?php 
+                            foreach($result as $room){
+                                ?>
+
+                                    <tr>
+                                        <!-- // ดึงข้อมูลจาก room ดึงมาแสดง หู่ม -->
+                                        <td><?= $room["room_id"] ?></td>
+                                        <td><?= $room["smoke"] ?></td>
+                                        <td><?= $room["bathtub"] ?></td>
+                                        <td><?= $room["price"] ?></td>
+                                    </tr>
+
+                                <?php
+                            }
+                        ?>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <?php include "footer.php"; ?>
 
 </body>
 </html>

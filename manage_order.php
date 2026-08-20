@@ -21,7 +21,7 @@
     }
 
     /* ตกแต่งปุ่ม "เพิ่ม" */
-    a[href="add_order.php"] {
+    a{
         display: inline-block;
         background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
         color: #ffffff;
@@ -36,7 +36,7 @@
         max-width: 1000px;
     }
 
-    a[href="add_order.php"]:hover {
+    a:hover {
         opacity: 0.92;
         box-shadow: 0 6px 16px rgba(168, 85, 247, 0.4);
         transform: translateY(-1px);
@@ -101,7 +101,7 @@
     }
 
     /* ปุ่มแก้ไข และ ปุ่มลบ */
-    a[href*="edit_order.php"] {
+    a {
         display: inline-block;
         background-color: #e9d5ff;
         color: #6b21a8;
@@ -113,12 +113,12 @@
         transition: all 0.2s ease;
     }
 
-    a[href*="edit_order.php"]:hover {
+    a:hover {
         background-color: #c084fc;
         color: #ffffff;
     }
 
-    a[href*="delete_order.php"] {
+    a{
         display: inline-block;
         background-color: #fecdd3;
         color: #9f1239;
@@ -130,20 +130,24 @@
         transition: all 0.2s ease;
     }
 
-    a[href*="delete_order.php"]:hover {
+    a:hover {
         background-color: #f43f5e;
         color: #ffffff;
     }
 </style>
 </head>
-<body>
+
+      <a href="index.php">Order</a>
+      <a href="room.php">Rooms</a>
+      <a href="add_order.php">Add Order</a>
+      <a href="manage_order.php">Manage</a>
+
 
 <?php
 include "action/connect.php";
 $sql = "SELECT * FROM orders";
 $result = mysqli_query($con, $sql);
 ?>
-        <a href="add_order.php">เพิ่ม</a>
         <table border=1>
         <thead>
         <th>รหัสรายการ</th>
@@ -181,6 +185,6 @@ style="width:200px"
 }
 ?>
 </table>
-
+<?php include "footer.php"; ?>
 </body>
 </html>

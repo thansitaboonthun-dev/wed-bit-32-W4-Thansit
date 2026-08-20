@@ -104,7 +104,14 @@
     </style>
 </head>
 <body>
-    
+    <nav class="navbar">
+   <div class="navbar-links">
+      <a href="room.php" class="din-link"> Go To room</a>
+      <a href="add_order.php" class="din-link"> Go To Add</a>
+      <a href="manage_order.php" class="din-link"> Go To Manage</a>
+
+   </div>
+ </nav>
     <?php
         include "action/connect.php";
         //       ดึง   ทั้งหมด จาก ตาราง orders
@@ -145,10 +152,10 @@
             }
         ?>
     </table>
-    <div class="button-group">
-    <a href="room.php" class="din-link"> Go To room</a>
-    <a href="add_order.php" class="din-link"> Go To Add</a>
-    <a href="manage_order.php" class="din-link"> Go To Manage</a>
+
+
+    <?php include "footer.php"; ?>
+
 
 </body>
 </html>
