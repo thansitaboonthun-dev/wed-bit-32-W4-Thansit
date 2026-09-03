@@ -85,7 +85,7 @@
     </div>
     <div class="footer-links">
       <a href="index.php">Orders</a>
-      <a href="rooms.php">Rooms</a>
+      <a href="room.php">Rooms</a>
       <a href="add_order.php">Add Order</a>
       <a href="manage_order.php">Manage</a>
     </div>
